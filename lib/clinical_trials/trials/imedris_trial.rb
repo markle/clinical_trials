@@ -32,8 +32,6 @@ module ClinicalTrials
         hash['criteria'] = criteria.join("\n")
         hash['source']  = 'Imedris'
         hash['enrolling'] = 'Yes'
-
-        exclusion_criteria = additional_info 
         hash
       end
 
