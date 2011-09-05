@@ -17,32 +17,33 @@ module ClinicalTrials
   #        )
   #
   #will produce {"1"=>"a1", "2"=>"b2", "3"=>"b3", "4"=>"b4"}
-  #
+  class Merger
+    attr_accessor :attributes
 
- class Merger
-   attr_accessor :attributes
-   def initialize(list = []) 
+    def initialize(list = []) 
       @attributes = {}
       list.compact!
-      list.each {|member| 
+      list.each do |member| 
         hash = member.to_hash
         underwrite(hash)
-       }
-  end
-  
-  def to_hash
-    @attributes.to_hash
-  end  
+      end
+    end
 
-  def overwrite(update)
-     @attributes.update(update) {|key, v1, v2| 
-          v2 || v1
-       }
-   end
-   def underwrite(update)
-     @attributes.update(update) {|key, v1, v2| 
-          v1 || v2
-       }
-   end
+    def to_hash
+      @attributes.to_hash
+    end  
+
+    def overwrite(update)
+      @attributes.update(update) do |key, v1, v2| 
+        v2 || v1
+      end
+    end
+
+    def underwrite(update)
+      @attributes.update(update) do |key, v1, v2| 
+        v1 || v2
+      end
+    end
+
   end
 end
