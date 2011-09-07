@@ -18,16 +18,10 @@ module ClinicalTrials
 
     def run
       #begin 
-      puts "Getting List"
-        get_lists
-        puts "Assemble"
-        
+        get_lists        
         assemble
         webfetch
-        puts "Expire"
-        expire_old
-        puts "Update"
-        
+        expire_old        
         update_same
         add_new
       #rescue => e

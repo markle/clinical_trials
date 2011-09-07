@@ -2,6 +2,7 @@ require 'open-uri'
 require 'yaml'
 require 'csv'
 require 'iconv'
+require 'nokogiri'
 
 require "clinical_trials/version"
 require 'clinical_trials/merger'
