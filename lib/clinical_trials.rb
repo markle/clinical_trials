@@ -4,7 +4,8 @@ require 'csv'
 require 'iconv'
 require 'nokogiri'
 
-require "clinical_trials/version"
+require "clinical_trials/version" 
+require "clinical_trials/configuration"
 require 'clinical_trials/merger'
 require 'clinical_trials/assembler'
 require 'clinical_trials/assemblage'
