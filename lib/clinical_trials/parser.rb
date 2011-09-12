@@ -70,7 +70,8 @@ module ClinicalTrials
     end
 
     def criteria 
-      EligibilityCleaner.format(doc.css('eligibility criteria textblock').first.content)
+      eligibility =  first_css_match 'eligibility criteria textblock' || ""
+      EligibilityCleaner.format(eligibility)
     end
 
     alias eligibility criteria

@@ -5,7 +5,7 @@
 # the implementation that sparkle as using, in terms of columns and such.
 
 class ClinicalTrials::Update
-     attr_accessor :nct_list, :imedris_list, :assembled, :config
+     attr_accessor :nct_list, :imedris_list, :assembled, :config, :merged
      def self.run
         runner = self.new
         runner.run
@@ -20,7 +20,7 @@ class ClinicalTrials::Update
           @imedris_list       = imedris_lists
           @assembled          = assemble(@nct_list, @imedris_list)
           update_from_dot_gov!(@assembled)
-          @assembled
+          @merged             = merge_down(@assembled)
       end
 
       def get_lists
@@ -34,7 +34,13 @@ class ClinicalTrials::Update
       def imedris_lists
         ClinicalTrials::Lists::ImedrisList.get_trials(@config.imedris_file)
       end
-
+      
+      def merge_down(assembled)
+         assembled.collect do  |assemblage| 
+           assemblage.merged_fields
+         end
+      end
+      
       def assemble(nct_list, imedris_list)        
         ClinicalTrials::Assembler.from_lists(nct_lists, imedris_lists)    
       end
